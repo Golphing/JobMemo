@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wang.dao.CompanyDao">
+	
+	<select id="getAllCompany" parameterType="Company" resultType="Company">
+		select * from company
+		where 
+			1=1
+		<if test="type !='' and type != null">
+			and type=#{type}
+		</if>
+		
+	</select>
+	
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="Company">
+		insert into company(name,type,remark,url) values(#{name},#{type},#{remark},#{url});
+	</insert>
+	
+	<delete id="delete">
+		delete from company where id=#{0}
+	</delete>
+	
+	<select id="getById" resultType="Company">
+		select * from company where id=#{param1}
+	</select>
+	
+	<update id="update" parameterType="Company">
+		update company set name=#{name},type=#{type},url=#{url},remark=#{remark} where id=#{id}
+	</update>
+</mapper>
